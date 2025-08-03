@@ -1,3 +1,32 @@
 <launch>
     <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find vins)/../config/vins_rviz_config.rviz" />
+
+    <!-- arg dataset default euroc -->
+    <!-- <arg name="dataset" default="hit" /> -->
+    <arg name="dataset" default="hit" />
+
+    <node name="vins" pkg="vins" type="vins_node" output="screen" args="$(find vins)/../config/$(arg dataset)/$(arg dataset)_stereo_imu_config.yaml" />
+
+    <!-- include mytool mytool.launch -->
+    <include file="$(find mytool)/launch/mytool.launch">
+    </include>
+
+    <node name="loop_fusion" pkg="loop_fusion" type="loop_fusion_node" output="screen" args="$(find vins)/../config/$(arg dataset)/$(arg dataset)_stereo_imu_config.yaml" />
+
+    <!-- play bag -->
+    
+    <!-- <node pkg="image_transport" type="republish" name="republish" args="compressed in:=/thermal_front raw out:=/thermal_front_1" output="screen" respawn="true" /> -->
+    <!-- republish /thermal_14bit/left/image_raw/compressed -->
+    <!-- <node pkg="image_transport" type="republish" name="republish_left" args="compressed in:=/thermal_14bit/left/image_mono out:=/thermal_14bit/left/image_mono" output="screen" respawn="true" /> -->
+    <!-- <node pkg="image_transport" type="republish" name="republish_right" args="compressed in:=/thermal_14bit/right/image_mono out:=/thermal_14bit/right/image_mono" output="screen" respawn="true" /> -->
+    <arg name="bag_path" default="/home/raymond/HTX/2_Dataset/hitstereo" />
+    <arg name="bag_name" default="2024-01-14-16-21-11" /> <arg name="bag_start_time" default="0" />
+    <arg name="bag_play_rate" default="1.0" />
+    <param name="bag_name" value="$(arg bag_name)" />
+    <arg name="clock_enable" default="--clock" />
+    <arg name="pause_enable" default="false" />
+    <arg name="pause_" default="$(eval '--pause' if arg('pause_enable') else '')" />
+    <node pkg="rosbag" type="play" name="play" args="$(arg clock_enable) $(arg pause_) -r $(arg bag_play_rate) -s $(arg bag_start_time) '$(arg bag_path)/$(arg bag_name).bag'"/>
+
+
 </launch>

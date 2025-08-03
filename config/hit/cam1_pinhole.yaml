@@ -1,0 +1,16 @@
+%YAML:1.0
+---
+model_type: PINHOLE
+camera_name: /thermal_14bit/right/image_mono
+image_width: 640
+image_height: 480
+distortion_parameters:
+   k1: -0.489173064896480
+   k2: 0.388107714447729
+   p1: 0.00137685302544284
+   p2: -0.00460909651554077
+projection_parameters:
+   fx: 591.175294964448
+   fy: 588.825041558649
+   cx: 338.124623127524
+   cy: 239.891347054984
