@@ -3,24 +3,25 @@
 
     <!-- arg dataset default euroc -->
     <!-- <arg name="dataset" default="hit" /> -->
-    <arg name="dataset" default="hit" />
+    <arg name="dataset" default="scout_mini" />
+    <arg name="mode" default="stereo_imu" />
 
-    <node name="vins" pkg="vins" type="vins_node" output="screen" args="$(find vins)/../config/$(arg dataset)/$(arg dataset)_stereo_imu_config.yaml" />
+    <node name="vins" pkg="vins" type="vins_node" output="screen" args="$(find vins)/../config/$(arg dataset)/$(arg dataset)_$(arg mode)_config.yaml" />
 
     <!-- include mytool mytool.launch -->
-    <include file="$(find mytool)/launch/mytool.launch">
-    </include>
+    <!-- <include file="$(find mytool)/launch/mytool.launch"></include> -->
 
-    <node name="loop_fusion" pkg="loop_fusion" type="loop_fusion_node" output="screen" args="$(find vins)/../config/$(arg dataset)/$(arg dataset)_stereo_imu_config.yaml" />
+    <node name="loop_fusion" pkg="loop_fusion" type="loop_fusion_node" output="screen" args="$(find vins)/../config/$(arg dataset)/$(arg dataset)_$(arg mode)_config.yaml" />
 
     <!-- play bag -->
     
     <!-- <node pkg="image_transport" type="republish" name="republish" args="compressed in:=/thermal_front raw out:=/thermal_front_1" output="screen" respawn="true" /> -->
     <!-- republish /thermal_14bit/left/image_raw/compressed -->
-    <!-- <node pkg="image_transport" type="republish" name="republish_left" args="compressed in:=/thermal_14bit/left/image_mono out:=/thermal_14bit/left/image_mono" output="screen" respawn="true" /> -->
-    <!-- <node pkg="image_transport" type="republish" name="republish_right" args="compressed in:=/thermal_14bit/right/image_mono out:=/thermal_14bit/right/image_mono" output="screen" respawn="true" /> -->
-    <arg name="bag_path" default="/home/raymond/HTX/2_Dataset/hitstereo" />
-    <arg name="bag_name" default="2024-01-14-16-21-11" /> <arg name="bag_start_time" default="0" />
+    <node pkg="image_transport" type="republish" name="republish_left" args="compressed in:=/oak_ffc_sync_publisher/CAM_B/image out:=/oak_ffc_sync_publisher/CAM_B/image1" output="screen" respawn="true" />
+    <node pkg="image_transport" type="republish" name="republish_right" args="compressed in:=/oak_ffc_sync_publisher/CAM_C/image out:=/oak_ffc_sync_publisher/CAM_C/image1" output="screen" respawn="true" />
+
+    <arg name="bag_path" default="/home/raymond/onedrive/NTU4DRad360_zj/scout_mini/0826" />
+    <arg name="bag_name" default="calib_slam_2025-08-26-21-19-20" /> <arg name="bag_start_time" default="0" />
     <arg name="bag_play_rate" default="1.0" />
     <param name="bag_name" value="$(arg bag_name)" />
     <arg name="clock_enable" default="--clock" />
