@@ -6,14 +6,18 @@ imu: 1
 num_of_cam: 2  
 
 imu_topic: "/oak_ffc_sync_publisher/imu"
-image0_topic: "/oak_ffc_sync_publisher/CAM_B/image1"
-image1_topic: "/oak_ffc_sync_publisher/CAM_C/image1"
+# image0_topic: "/oak_ffc_sync_publisher/CAM_B/image1"
+# image1_topic: "/oak_ffc_sync_publisher/CAM_C/image1"
+image0_topic: "/oak_ffc_sync_publisher/CAM_B/image_undistort"
+image1_topic: "/oak_ffc_sync_publisher/CAM_C/image_undistort"
 output_path: "/home/raymond/VINS-Fusion/src/VINS-Fusion/output"
 
 # cam0_calib: "camB_mei.yaml"
 # cam1_calib: "camC_mei.yaml"
-cam0_calib: "camB_KB.yaml"
-cam1_calib: "camC_KB.yaml"
+# cam0_calib: "camB_KB.yaml"
+# cam1_calib: "camC_KB.yaml"
+cam0_calib: "camB_pinhole.yaml"
+cam1_calib: "camC_pinhole.yaml"
 image_width: 1280
 image_height: 800
    
@@ -26,20 +30,20 @@ body_T_cam0: !!opencv-matrix
    rows: 4
    cols: 4
    dt: d
-   data: [-0.99997536552, -0.00699654251, -0.00056280205, 0.13968060446,
-        -0.00291683637, 0.48713651695, -0.87332096386, -0.08695402389,
-         0.00638438868, -0.87329780845, -0.48714492436, 0.03547395999,
-         0, 0, 0, 1]
+   data:   [-0.999908031066304, 0.013545500224429711, -0.0006699498315237435, 0.15898457877740882,
+            0.007395865626038256, 0.5032121920994277, -0.8641312347636381, 0.07036515564682967,
+            -0.011367962911109879, -0.8640567163943338, -0.5032660929101949, -0.023460732823060028,
+            0.0, 0.0, 0.0, 1.0]
 
 
 body_T_cam1: !!opencv-matrix
    rows: 4
    cols: 4
    dt: d
-   data: [-0.99738037491, -0.00158196225, 0.07231794486, -0.10750027631,
-        -0.06418218191, 0.48045987095, -0.87466505586, -0.08155745833,
-        -0.03336218335, -0.87701528482, -0.47930278000, 0.01433343394,
-        0, 0, 0, 1]
+   data: [-0.9998640431425616, 0.013050625481467532, -0.010078512050526124, -0.11184510329002925,
+         0.015265526871501529, 0.5015580616845015, -0.8649892915225145, 0.06883838915213174,
+         -0.006233692320414502, -0.8650255440932532, -0.5016890961005891, -0.024389009057274324,
+         0.0, 0.0, 0.0, 1.0]
 
 #Multiple thread support
 multiple_thread: 1
