@@ -21,7 +21,7 @@
     <node pkg="image_transport" type="republish" name="republish_right" args="compressed in:=/oak_ffc_sync_publisher/CAM_C/image out:=/oak_ffc_sync_publisher/CAM_C/image1" output="screen" respawn="true" />
 
     <arg name="bag_path" default="/home/raymond/onedrive/NTU4DRad360_zj/scout_mini/0826" />
-    <arg name="bag_name" default="calib_BCIMU_undistort_crop" /> <arg name="bag_start_time" default="0" />
+    <arg name="bag_name" default="calib_b6_all_undistort" /> <arg name="bag_start_time" default="0" />
     <arg name="bag_play_rate" default="5.0" />
     <param name="bag_name" value="$(arg bag_name)" />
     <arg name="clock_enable" default="--clock" />
